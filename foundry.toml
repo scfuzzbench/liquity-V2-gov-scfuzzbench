@@ -17,11 +17,15 @@ runs = 5000
 [profile.default.fuzz]
 runs = 100
 
-[profile.default.invariant]
-runs           = 100    # The number of calls to make in the invariant tests
-depth          = 100    # The number of times to run the invariant tests
-call_override  = false  # Override calls
-fail_on_revert = true   # Fail the test if the contract reverts
+[invariant]
+runs = 500000000
+depth = 100
+include_storage = true
+show_solidity = true
+show_metrics = true
+fail_on_revert = false
+continuous_run = true
+corpus_dir = "corpus/foundry"
 
 [profile.default.fmt]
 int_types = "preserve"
