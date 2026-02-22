@@ -20,7 +20,6 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         targetSender(address(0x10000));
         targetSender(address(0x20000));
         targetSender(address(0x30000));
-        // Canary assertion failures are recorded when the fuzzer exercises canary checks.
     }
 
     function _isAssertion(string memory) internal pure returns (bool) {
