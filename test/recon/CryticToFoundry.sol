@@ -110,5 +110,20 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         assertTrue(!assertionFailures[ASSERTION_GENERIC], ASSERTION_GENERIC);
     }
 
+    function invariant_assertion_failure_CANARY() public {
+        invariant_canary_assertion_failure();
+        assertTrue(!assertionFailures[ASSERTION_CANARY_ASSERTION_FAILURE], ASSERTION_CANARY_ASSERTION_FAILURE);
+    }
+
+    function invariant_canary()
+        public
+        pure
+        override
+        returns (bool)
+    {
+        assertTrue(false, INVARIANT_CANARY_GLOBAL_INVARIANT_FAILURE);
+        return false;
+    }
+
     function invariant_noop() public view {}
 }
