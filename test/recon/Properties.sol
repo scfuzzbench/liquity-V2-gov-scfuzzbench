@@ -7,9 +7,9 @@ import {BribeInitiativeProperties} from "./properties/BribeInitiativeProperties.
 
 abstract contract Properties is GovernanceProperties {
     string internal constant ASSERTION_CANARY_ASSERTION_FAILURE =
-        "!!! CANARY_ASSERTION_FAILURE";
+        "!!! canary assertion";
     string internal constant INVARIANT_CANARY_GLOBAL_INVARIANT_FAILURE =
-        "CANARY_GLOBAL_INVARIANT_FAILURE";
+        "Canary invariant";
 
     /// @dev Canary assertion failure expected to fail immediately.
     function invariant_canary_assertion_failure() public returns (bool) {
@@ -18,7 +18,7 @@ abstract contract Properties is GovernanceProperties {
     }
 
     /// @dev Canary global invariant expected to fail immediately.
-    function invariant_canary_global_invariant_failure()
+    function invariant_canary()
         public
         virtual
         returns (bool)
