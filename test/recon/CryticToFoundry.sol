@@ -22,8 +22,8 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         targetSender(address(0x30000));
     }
 
-    function _isAssertion(string memory) internal pure returns (bool) {
-        return true;
+    function _isAssertion(string memory reason) internal pure returns (bool) {
+        return _hasAssertionPrefix(reason);
     }
 
     function _hasAssertionPrefix(string memory reason) internal pure returns (bool) {
@@ -110,19 +110,8 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         assertTrue(!assertionFailures[ASSERTION_GENERIC], ASSERTION_GENERIC);
     }
 
-    function invariant_assertion_failure_CANARY() public {
-        invariant_canary_assertion_failure();
+    function invariant_assertion_failure_CANARY() public view {
         assertTrue(!assertionFailures[ASSERTION_CANARY_ASSERTION_FAILURE], ASSERTION_CANARY_ASSERTION_FAILURE);
-    }
-
-    function invariant_canary()
-        public
-        pure
-        override
-        returns (bool)
-    {
-        assertTrue(false, INVARIANT_CANARY_GLOBAL_INVARIANT_FAILURE);
-        return false;
     }
 
     function invariant_noop() public view {}

@@ -11,10 +11,9 @@ abstract contract Properties is GovernanceProperties {
     string internal constant INVARIANT_CANARY_GLOBAL_INVARIANT_FAILURE =
         "Canary invariant";
 
-    /// @dev Canary assertion failure expected to fail immediately.
-    function invariant_canary_assertion_failure() public returns (bool) {
-        t(false, ASSERTION_CANARY_ASSERTION_FAILURE);
-        return false;
+    /// @dev Canary assertion helper. A failing input is expected to be discovered during fuzzing.
+    function assert_canary(uint256 entropy) public {
+        t(entropy > 0, ASSERTION_CANARY_ASSERTION_FAILURE);
     }
 
     /// @dev Canary global invariant expected to fail immediately.
