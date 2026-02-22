@@ -5,7 +5,7 @@ import {BeforeAfter} from "../BeforeAfter.sol";
 import {IBribeInitiative} from "../../../src/interfaces/IBribeInitiative.sol";
 
 abstract contract BribeInitiativeProperties is BeforeAfter {
-    function property_BI01() public {
+    function invariant_BI01() public {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             address initiative = deployedInitiatives[i];
@@ -49,11 +49,11 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
         }
     }
 
-    function property_BI02() public {
+    function invariant_BI02() public {
         t(!claimedTwice, "B2-01: User can only claim bribes once in an epoch");
     }
 
-    function property_BI03() public {
+    function invariant_BI03() public {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             IBribeInitiative initiative = IBribeInitiative(deployedInitiatives[i]);
@@ -66,7 +66,7 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
         }
     }
 
-    function property_BI04() public {
+    function invariant_BI04() public {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             IBribeInitiative initiative = IBribeInitiative(deployedInitiatives[i]);
@@ -80,7 +80,7 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
     }
 
     // TODO: double check that this implementation is correct
-    function property_BI05() public {
+    function invariant_BI05() public {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             address initiative = deployedInitiatives[i];

@@ -5,7 +5,7 @@ import {BeforeAfter} from "../BeforeAfter.sol";
 
 abstract contract GovernanceProperties is BeforeAfter {
 
-    function property_GV01() public {
+    function invariant_GV01() public {
         // first check that epoch hasn't changed after the operation
         if(_before.epoch == _after.epoch) {
             // loop through the initiatives and check that their status hasn't changed
