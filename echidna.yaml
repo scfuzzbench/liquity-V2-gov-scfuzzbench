@@ -1,5 +1,5 @@
-testMode: "assertion"
-prefix: "echidna_"
+testMode: "property"
+prefix: "invariant_"
 coverage: true
 corpusDir: "corpus/echidna"
 balanceAddr: 0x1043561a8829300000
