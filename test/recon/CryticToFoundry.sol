@@ -9,9 +9,6 @@ import {Asserts} from "@chimera/Asserts.sol";
 // forge test --match-contract CryticToFoundry --match-test 'invariant_' -vv
 contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
     mapping(string => bool) private assertionFailures;
-    uint256 private assertionFailureCount;
-
-    string internal constant ASSERTION_GENERIC = "!!!assertion_failed";
 
     function setUp() public {
         setup();
@@ -31,32 +28,17 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         return reasonBytes.length >= 3 && reasonBytes[0] == "!" && reasonBytes[1] == "!" && reasonBytes[2] == "!";
     }
 
-    function _normalizeAssertionReason(string memory reason) internal pure returns (string memory) {
-        if (bytes(reason).length == 0) {
-            return ASSERTION_GENERIC;
-        }
-
-        if (_hasAssertionPrefix(reason)) {
-            return reason;
-        }
-
-        return string.concat("!!!", reason);
-    }
-
     function _recordAssertion(bool ok, string memory reason) internal {
         if (ok) {
             return;
         }
 
-        if (!assertionFailures[reason]) {
-            assertionFailures[reason] = true;
-            assertionFailureCount++;
-        }
+        assertionFailures[reason] = true;
     }
 
     function gt(uint256 a, uint256 b, string memory reason) internal virtual override(FoundryAsserts, Asserts) {
         if (_isAssertion(reason)) {
-            _recordAssertion(a > b, _normalizeAssertionReason(reason));
+            _recordAssertion(a > b, reason);
         } else {
             super.gt(a, b, reason);
         }
@@ -64,7 +46,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
 
     function gte(uint256 a, uint256 b, string memory reason) internal virtual override(FoundryAsserts, Asserts) {
         if (_isAssertion(reason)) {
-            _recordAssertion(a >= b, _normalizeAssertionReason(reason));
+            _recordAssertion(a >= b, reason);
         } else {
             super.gte(a, b, reason);
         }
@@ -72,7 +54,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
 
     function lt(uint256 a, uint256 b, string memory reason) internal virtual override(FoundryAsserts, Asserts) {
         if (_isAssertion(reason)) {
-            _recordAssertion(a < b, _normalizeAssertionReason(reason));
+            _recordAssertion(a < b, reason);
         } else {
             super.lt(a, b, reason);
         }
@@ -80,7 +62,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
 
     function lte(uint256 a, uint256 b, string memory reason) internal virtual override(FoundryAsserts, Asserts) {
         if (_isAssertion(reason)) {
-            _recordAssertion(a <= b, _normalizeAssertionReason(reason));
+            _recordAssertion(a <= b, reason);
         } else {
             super.lte(a, b, reason);
         }
@@ -88,7 +70,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
 
     function eq(uint256 a, uint256 b, string memory reason) internal virtual override(FoundryAsserts, Asserts) {
         if (_isAssertion(reason)) {
-            _recordAssertion(a == b, _normalizeAssertionReason(reason));
+            _recordAssertion(a == b, reason);
         } else {
             super.eq(a, b, reason);
         }
@@ -96,22 +78,46 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
 
     function t(bool b, string memory reason) internal virtual override(FoundryAsserts, Asserts) {
         if (_isAssertion(reason)) {
-            _recordAssertion(b, _normalizeAssertionReason(reason));
+            _recordAssertion(b, reason);
         } else {
             super.t(b, reason);
         }
     }
 
-    function invariant_assertion_failure_count_zero() public view {
-        assertEq(assertionFailureCount, 0, "!!!assertion failure count must remain zero");
-    }
-
-    function invariant_assertion_failure_generic() public view {
-        assertTrue(!assertionFailures[ASSERTION_GENERIC], ASSERTION_GENERIC);
-    }
-
     function invariant_assertion_failure_CANARY() public view {
         assertTrue(!assertionFailures[ASSERTION_CANARY], ASSERTION_CANARY);
+    }
+
+    function invariant_assertion_failure_GV01() public view {
+        assertTrue(!assertionFailures[ASSERTION_GV01], ASSERTION_GV01);
+    }
+
+    function invariant_assertion_failure_BI01_LQTY() public view {
+        assertTrue(!assertionFailures[ASSERTION_BI01_LQTY], ASSERTION_BI01_LQTY);
+    }
+
+    function invariant_assertion_failure_BI01_BOLD() public view {
+        assertTrue(!assertionFailures[ASSERTION_BI01_BOLD], ASSERTION_BI01_BOLD);
+    }
+
+    function invariant_assertion_failure_BI02() public view {
+        assertTrue(!assertionFailures[ASSERTION_BI02], ASSERTION_BI02);
+    }
+
+    function invariant_assertion_failure_BI03() public view {
+        assertTrue(!assertionFailures[ASSERTION_BI03], ASSERTION_BI03);
+    }
+
+    function invariant_assertion_failure_BI04() public view {
+        assertTrue(!assertionFailures[ASSERTION_BI04], ASSERTION_BI04);
+    }
+
+    function invariant_assertion_failure_BI05_BRIBE_DUST() public view {
+        assertTrue(!assertionFailures[ASSERTION_BI05_BRIBE_DUST], ASSERTION_BI05_BRIBE_DUST);
+    }
+
+    function invariant_assertion_failure_BI05_BOLD_DUST() public view {
+        assertTrue(!assertionFailures[ASSERTION_BI05_BOLD_DUST], ASSERTION_BI05_BOLD_DUST);
     }
 
     function invariant_noop() public view {}

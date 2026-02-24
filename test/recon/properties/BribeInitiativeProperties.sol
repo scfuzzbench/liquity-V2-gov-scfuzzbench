@@ -5,6 +5,14 @@ import {BeforeAfter} from "../BeforeAfter.sol";
 import {IBribeInitiative} from "../../../src/interfaces/IBribeInitiative.sol";
 
 abstract contract BribeInitiativeProperties is BeforeAfter {
+    function _assertionBI01Lqty() internal pure virtual returns (string memory);
+    function _assertionBI01Bold() internal pure virtual returns (string memory);
+    function _assertionBI02() internal pure virtual returns (string memory);
+    function _assertionBI03() internal pure virtual returns (string memory);
+    function _assertionBI04() internal pure virtual returns (string memory);
+    function _assertionBI05BribeDust() internal pure virtual returns (string memory);
+    function _assertionBI05BoldDust() internal pure virtual returns (string memory);
+
     function invariant_BI01() public {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
@@ -38,19 +46,19 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
                 eq(
                     lqtyPercentageOfBribe88,
                     allocationPercentageOfTotal,
-                    "BI-01: User should receive percentage of bribes corresponding to their allocation"
+                    _assertionBI01Lqty()
                 );
                 eq(
                     lusdPercentageOfBribe88,
                     allocationPercentageOfTotal,
-                    "BI-01: User should receive percentage of BOLD bribes corresponding to their allocation"
+                    _assertionBI01Bold()
                 );
             }
         }
     }
 
     function invariant_BI02() public {
-        t(!claimedTwice, "B2-01: User can only claim bribes once in an epoch");
+        t(!claimedTwice, _assertionBI02());
     }
 
     function invariant_BI03() public {
@@ -61,7 +69,7 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
             eq(
                 ghostLqtyAllocationByUserAtEpoch[user],
                 lqtyAllocatedByUserAtEpoch,
-                "BI-03: Accounting for user allocation amount is always correct"
+                _assertionBI03()
             );
         }
     }
@@ -74,7 +82,7 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
             eq(
                 ghostTotalAllocationAtEpoch[currentEpoch],
                 totalLQTYAllocatedAtEpoch,
-                "BI-04: Accounting for total allocation amount is always correct"
+                _assertionBI04()
             );
         }
     }
@@ -96,12 +104,12 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
                 lte(
                     bribeTokenBalanceInitiative,
                     1e8,
-                    "BI-05: Bribe token dust amount remaining after claiming should be less than 100 million wei"
+                    _assertionBI05BribeDust()
                 );
                 lte(
                     boldTokenBalanceInitiative,
                     1e8,
-                    "BI-05: Bold token dust amount remaining after claiming should be less than 100 million wei"
+                    _assertionBI05BoldDust()
                 );
             }
         }
