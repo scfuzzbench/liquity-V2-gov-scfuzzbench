@@ -10,14 +10,4 @@ contract CryticTester is TargetFunctions, CryticAsserts {
     constructor() payable {
         setup();
     }
-
-    function echidna_assert_canary_ASSERTION_CANARY() public returns (bool) {
-        assert_canary_ASSERTION_CANARY(0);
-        return false;
-    }
-
-    function echidna_invariant_canary() public returns (bool) {
-        invariant_canary();
-        return false;
-    }
 }
