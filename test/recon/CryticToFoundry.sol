@@ -84,39 +84,39 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         }
     }
 
-    function invariant_assertion_failure_CANARY() public view {
+    function invariant_assertion_failure_assert_canary_ASSERTION_CANARY() public view {
         assertTrue(!assertionFailures[ASSERTION_CANARY], ASSERTION_CANARY);
     }
 
-    function invariant_assertion_failure_GV01() public view {
+    function invariant_assertion_failure_invariant_GV01_ASSERTION_GV01() public view {
         assertTrue(!assertionFailures[ASSERTION_GV01], ASSERTION_GV01);
     }
 
-    function invariant_assertion_failure_BI01_LQTY() public view {
+    function invariant_assertion_failure_invariant_BI01_ASSERTION_BI01_LQTY() public view {
         assertTrue(!assertionFailures[ASSERTION_BI01_LQTY], ASSERTION_BI01_LQTY);
     }
 
-    function invariant_assertion_failure_BI01_BOLD() public view {
+    function invariant_assertion_failure_invariant_BI01_ASSERTION_BI01_BOLD() public view {
         assertTrue(!assertionFailures[ASSERTION_BI01_BOLD], ASSERTION_BI01_BOLD);
     }
 
-    function invariant_assertion_failure_BI02() public view {
+    function invariant_assertion_failure_invariant_BI02_ASSERTION_BI02() public view {
         assertTrue(!assertionFailures[ASSERTION_BI02], ASSERTION_BI02);
     }
 
-    function invariant_assertion_failure_BI03() public view {
+    function invariant_assertion_failure_invariant_BI03_ASSERTION_BI03() public view {
         assertTrue(!assertionFailures[ASSERTION_BI03], ASSERTION_BI03);
     }
 
-    function invariant_assertion_failure_BI04() public view {
+    function invariant_assertion_failure_invariant_BI04_ASSERTION_BI04() public view {
         assertTrue(!assertionFailures[ASSERTION_BI04], ASSERTION_BI04);
     }
 
-    function invariant_assertion_failure_BI05_BRIBE_DUST() public view {
+    function invariant_assertion_failure_invariant_BI05_ASSERTION_BI05_BRIBE_DUST() public view {
         assertTrue(!assertionFailures[ASSERTION_BI05_BRIBE_DUST], ASSERTION_BI05_BRIBE_DUST);
     }
 
-    function invariant_assertion_failure_BI05_BOLD_DUST() public view {
+    function invariant_assertion_failure_invariant_BI05_ASSERTION_BI05_BOLD_DUST() public view {
         assertTrue(!assertionFailures[ASSERTION_BI05_BOLD_DUST], ASSERTION_BI05_BOLD_DUST);
     }
 

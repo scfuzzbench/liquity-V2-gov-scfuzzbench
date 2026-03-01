@@ -11,8 +11,13 @@ contract CryticTester is TargetFunctions, CryticAsserts {
         setup();
     }
 
-    function invariant_assertion_failure_CANARY() public returns (bool) {
-        assert_canary(0);
+    function echidna_assert_canary_ASSERTION_CANARY() public returns (bool) {
+        assert_canary_ASSERTION_CANARY(0);
+        return false;
+    }
+
+    function echidna_invariant_canary() public returns (bool) {
+        invariant_canary();
         return false;
     }
 }
