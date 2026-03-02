@@ -6,7 +6,7 @@ import {BeforeAfter} from "../BeforeAfter.sol";
 abstract contract GovernanceProperties is BeforeAfter {
     function _assertionGV01() internal pure virtual returns (string memory);
 
-    function invariant_GV01() public {
+    function invariant_GV01() public returns (bool) {
         // first check that epoch hasn't changed after the operation
         if(_before.epoch == _after.epoch) {
             // loop through the initiatives and check that their status hasn't changed
@@ -19,6 +19,7 @@ abstract contract GovernanceProperties is BeforeAfter {
                 );
             }
         }
+        return true;
     }
 
 }

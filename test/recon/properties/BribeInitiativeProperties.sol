@@ -13,7 +13,7 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
     function _assertionBI05BribeDust() internal pure virtual returns (string memory);
     function _assertionBI05BoldDust() internal pure virtual returns (string memory);
 
-    function invariant_BI01() public {
+    function invariant_BI01() public returns (bool) {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             address initiative = deployedInitiatives[i];
@@ -55,13 +55,15 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
                 );
             }
         }
+        return true;
     }
 
-    function invariant_BI02() public {
+    function invariant_BI02() public returns (bool) {
         t(!claimedTwice, _assertionBI02());
+        return true;
     }
 
-    function invariant_BI03() public {
+    function invariant_BI03() public returns (bool) {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             IBribeInitiative initiative = IBribeInitiative(deployedInitiatives[i]);
@@ -72,9 +74,10 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
                 _assertionBI03()
             );
         }
+        return true;
     }
 
-    function invariant_BI04() public {
+    function invariant_BI04() public returns (bool) {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             IBribeInitiative initiative = IBribeInitiative(deployedInitiatives[i]);
@@ -85,10 +88,11 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
                 _assertionBI04()
             );
         }
+        return true;
     }
 
     // TODO: double check that this implementation is correct
-    function invariant_BI05() public {
+    function invariant_BI05() public returns (bool) {
         uint16 currentEpoch = governance.epoch();
         for (uint8 i; i < deployedInitiatives.length; i++) {
             address initiative = deployedInitiatives[i];
@@ -113,5 +117,6 @@ abstract contract BribeInitiativeProperties is BeforeAfter {
                 );
             }
         }
+        return true;
     }
 }
