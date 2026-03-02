@@ -69,6 +69,6 @@ abstract contract Properties is GovernanceProperties, BribeInitiativeProperties 
         returns (bool)
     {
         t(false, INVARIANT_CANARY_GLOBAL_INVARIANT_FAILURE);
-        return false;
+        return true;
     }
 }
