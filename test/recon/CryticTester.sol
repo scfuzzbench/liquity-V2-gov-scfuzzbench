@@ -10,9 +10,4 @@ contract CryticTester is TargetFunctions, CryticAsserts {
     constructor() payable {
         setup();
     }
-
-    function invariant_assertion_failure_CANARY() public returns (bool) {
-        assert_canary(0);
-        return false;
-    }
 }

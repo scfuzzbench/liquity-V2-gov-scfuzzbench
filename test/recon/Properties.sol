@@ -58,7 +58,7 @@ abstract contract Properties is GovernanceProperties, BribeInitiativeProperties 
     }
 
     /// @dev Canary assertion helper. A failing input is expected to be discovered during fuzzing.
-    function assert_canary(uint256 entropy) public {
+    function assert_canary_ASSERTION_CANARY(uint256 entropy) public {
         t(entropy > 0, ASSERTION_CANARY);
     }
 
