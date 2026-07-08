@@ -26,6 +26,8 @@ show_solidity = true
 show_metrics = true
 fail_on_revert = false
 corpus_dir = "corpus/foundry"
+max_time_delay = 604800
+max_block_delay = 60480
 
 [profile.default.fmt]
 int_types = "preserve"
